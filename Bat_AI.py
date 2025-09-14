@@ -1,0 +1,21 @@
+import google.generativeai as genai
+
+API_KEY = "AIzaSyA4o01UEbhVAk0nCaMLxv0beEyWPdkW-9o"
+
+genai.configure(api_key=API_KEY)
+
+Bat = genai.GenerativeModel("gemini-2.5-flash")
+
+print("Welcome to Bat AI! Type 'exit' to quit.\n")
+
+while True:
+    user_input = input("You: ")
+    if user_input.lower() in ["exit", "quit"]:
+        print(" Bat: Goodbye! See you again.")
+        break
+
+    try:
+        response = Bat.generate_content(user_input)
+        print("Bat:", response.text.strip())
+    except Exception as e:
+        print("Mist: Oops, something went wrong.", e)
